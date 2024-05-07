@@ -7,7 +7,7 @@ type Props = {};
 const Card = (props: Props) => {
   return (
     <div className="mb-[50px] flex items-center gap-[50px]">
-      <div className="flex-1 h-[350px] relative">
+      <div className="flex-1 h-[350px] relative xl:hidden">
         <Image src={"/p1.jpeg"} alt="blog" fill className="object-cover" />
       </div>
       <div className="flex-1 flex flex-col gap-[30px]">
