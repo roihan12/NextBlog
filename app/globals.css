@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 * {
   padding: 0;
   margin: 0;
@@ -19,4 +17,12 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.ql-container {
+  font-size: 28px !important;
+}
+
+.quill > .ql-container > .ql-editor.ql-blank::before {
+  color: #b3b3b1;
 }
