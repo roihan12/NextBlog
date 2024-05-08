@@ -1,5 +1,7 @@
 "use client";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
@@ -7,8 +9,19 @@ import "react-quill/dist/quill.bubble.css";
 type Props = {};
 
 const WritePage = (props: Props) => {
+  const { status } = useSession();
+  const router = useRouter();
+
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (status === "authenticated") {
+    router.push("/");
+  }
   return (
     <div>
       <input
@@ -52,7 +65,9 @@ const WritePage = (props: Props) => {
           placeholder="Write a post.."
         />
       </div>
-      <button className="absolute top-[30px] right-[20px] px-2 py-1 bg-[#1a8917] text-white cursor-pointer rounded">Publish</button>
+      <button className="absolute top-[30px] right-[20px] px-2 py-1 bg-[#1a8917] text-white cursor-pointer rounded">
+        Publish
+      </button>
     </div>
   );
 };

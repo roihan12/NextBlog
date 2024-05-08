@@ -9,8 +9,6 @@ type Props = {};
 const ThemeToggle = (props: Props) => {
   const { theme, setTheme } = useTheme();
 
-  console.log(theme);
-
   return (
     <div
       className="w-10 h-5 rounded-full flex items-center justify-between cursor-pointer  relative"
