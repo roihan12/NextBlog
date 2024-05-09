@@ -5,7 +5,7 @@ import type { Awaitable, NextAuthOptions, User } from "next-auth";
 import GithubProvider, { GithubProfile } from "next-auth/providers/github";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import type { Adapter } from "next-auth/adapters";
-import prisma from "./prisma";
+import { prisma } from "./prisma";
 const {
   NEXT_PUBLIC_GOOGLE_ID,
   NEXT_PUBLIC_GOOGLE_SECRET,

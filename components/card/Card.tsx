@@ -1,10 +1,13 @@
+import { Post } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-type Props = {};
+type Props = {
+  post: Post;
+};
 
-const Card = (props: Props) => {
+const Card = ({ post }: Props) => {
   return (
     <div className="mb-[50px] flex items-center gap-[50px]">
       <div className="flex-1 h-[350px] relative xl:hidden">
@@ -16,7 +19,7 @@ const Card = (props: Props) => {
           <span className="text-red-500 font-semibold">CULTURE</span>
         </div>
         <Link href={"/"}>
-          <h1 className="text-[32px] font-bold">What is Lorem Ipsum?</h1>
+          <h1 className="text-[32px] font-bold">{post.title}</h1>
         </Link>
         <p className="text-[18px] font-normal text-secondary">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum ex

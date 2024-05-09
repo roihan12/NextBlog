@@ -5,13 +5,22 @@ import Footer from "@/components/footer/Footer";
 import Menu from "@/components/menu/Menu";
 import Navbar from "@/components/navbar/Navbar";
 
-export default function Home() {
+export default function Home({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}) {
+  const currentPage = Number(searchParams?.page) || 1;
+
   return (
     <div className="">
       <Featured />
       <CategoryList />
       <div className="flex flex-row gap-[50px]">
-        <CardList />
+        <CardList page={currentPage} />
         <Menu />
       </div>
     </div>

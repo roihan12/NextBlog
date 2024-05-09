@@ -13,9 +13,9 @@ const Navbar = () => {
         <Image src={"/tiktok.png"} alt="logo" width={24} height={24} />
         <Image src={"/youtube.png"} alt="logo" width={24} height={24} />
       </div>
-      <div className="flex-1 text-center text-4xl font-bold xl:text-[32px] lg:text-left md:text-[24px]">
+      <Link href={"/"} className="flex-1 text-center text-4xl font-bold xl:text-[32px] lg:text-left md:text-[24px]">
         NextBlog
-      </div>
+      </Link>
       <div className="flex flex-1 gap-[20px] items-center xl:text-[18px] xl:gap-[15px] sm:justify-end">
         <ThemeToggle />
         <Link href={"/"} className="sm:hidden">
