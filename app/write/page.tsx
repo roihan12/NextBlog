@@ -8,12 +8,12 @@ import "react-quill/dist/quill.snow.css";
 import { upload } from "@/utils/uploadImage";
 import { htmlToMarkdown, markdownToHtml } from "@/utils/parser";
 
-export interface EditorContentChanged {
+ interface EditorContentChanged {
   html: string;
   markdown: string;
 }
 
-export interface EditorProps {
+ interface EditorProps {
   value?: string;
   onChange?: (changes: EditorContentChanged) => void;
 }
