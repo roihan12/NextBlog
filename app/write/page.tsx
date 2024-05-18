@@ -14,7 +14,6 @@ export interface EditorContentChanged {
 }
 
 export interface EditorProps {
-  value?: string;
   onChange?: (changes: EditorContentChanged) => void;
 }
 
@@ -24,7 +23,7 @@ const WritePage:FC<EditorProps> = (props) => {
   const [open, setOpen] = React.useState(false);
   // const [value, setValue] = React.useState("");
   const [value, setValue] = React.useState<string>(
-    markdownToHtml(props.value || "")
+    markdownToHtml("")
   );
   const [file, setFile] = React.useState<File>();
   const [media, setMedia] = React.useState<string>("");
