@@ -1,7 +1,12 @@
 import { env } from "@/env.mjs";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
-import type { Awaitable, NextAuthOptions, User } from "next-auth";
+import {
+  getServerSession,
+  type Awaitable,
+  type NextAuthOptions,
+  type User,
+} from "next-auth";
 import GithubProvider, { GithubProfile } from "next-auth/providers/github";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import type { Adapter } from "next-auth/adapters";
@@ -65,3 +70,5 @@ export const options: NextAuthOptions = {
     },
   },
 };
+
+export const getAuthSession = () => getServerSession(options);

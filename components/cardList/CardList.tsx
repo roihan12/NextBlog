@@ -5,11 +5,15 @@ import { Post } from "@prisma/client";
 
 type Props = {
   page?: number;
+  category?: string;
 };
-const getData = async (page: number) => {
-  const res = await fetch(`http://localhost:3000/api/posts?page=${page}`, {
-    cache: "no-store",
-  });
+const getData = async (page: number, category: string) => {
+  const res = await fetch(
+    `http://localhost:3000/api/posts?page=${page}&category=${category || ""}`,
+    {
+      cache: "no-store",
+    }
+  );
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -18,15 +22,15 @@ const getData = async (page: number) => {
   return res.json();
 };
 
-const CardList = async ({ page }: Props) => {
-  const { posts, count } = await getData(page!);
+const CardList = async ({ page, category }: Props) => {
+  const { posts, count } = await getData(page!, category!);
 
   const POST_PER_PAGE = 2;
 
   const hasPrev = POST_PER_PAGE * (page! - 1) > 0;
   const hasNext = POST_PER_PAGE * (page! - 1) + POST_PER_PAGE < count;
 
-  console.log(posts);
+
   return (
     <div className="basis-9/12 md:flex-1 lg:flex-1">
       <h1 className="my-[50px] text-[32px] font-bold">Recent Posts</h1>

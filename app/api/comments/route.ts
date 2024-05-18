@@ -2,34 +2,25 @@ import { getAuthSession } from "@/utils/auth";
 import { prisma } from "@/utils/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: Request, res: Response) {
-  try {
-    const { searchParams } = new URL(req.url);
-    console.log(searchParams);
-    const page = searchParams.get("page");
-    const category = searchParams.get("category");
-    const POST_PER_PAGE = 2;
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const postSlug = searchParams.get("postSlug");
 
-    const query = {
-      take: POST_PER_PAGE,
-      skip: POST_PER_PAGE * (Number(page) - 1),
+  try {
+    const comments = await prisma.comment.findMany({
       where: {
-        ...(category && {
-          catSlug: category,
+        ...(postSlug && {
+          postSlug,
         }),
       },
-    };
-    const [posts, count] = await prisma.$transaction([
-      prisma.post.findMany(query),
-      prisma.post.count({ where: query.where }),
-    ]);
+      include: {
+        user: true,
+      },
+    });
 
-    return NextResponse.json(
-      { posts, count },
-      {
-        status: 200,
-      }
-    );
+    return NextResponse.json(comments, {
+      status: 200,
+    });
   } catch (error) {
     console.log(error);
     return NextResponse.json(
@@ -41,12 +32,11 @@ export async function GET(req: Request, res: Response) {
   }
 }
 
-// Create a Post
 export async function POST(req: NextRequest, res: NextResponse) {
   const session = await getAuthSession();
   if (!session?.user) {
     return NextResponse.json(
-      { error: "You must be logged in to create a post." },
+      { error: "You must be logged in to create a comment." },
       {
         status: 401,
       }
@@ -56,14 +46,14 @@ export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const body = await req.json();
 
-    const post = await prisma.post.create({
+    const comment = await prisma.comment.create({
       data: {
         ...body,
         userEmail: session.user.email,
       },
     });
 
-    return NextResponse.json(post, {
+    return NextResponse.json(comment, {
       status: 200,
     });
   } catch (error) {

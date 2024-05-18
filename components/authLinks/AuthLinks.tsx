@@ -45,7 +45,7 @@ const AuthLinks = (props: Props) => {
         <div className="w-full h-[2px] bg-black dark:bg-white"></div>
       </div>
       {open && (
-        <div className="absolute top-[100px] left-0 bg-primary h-[calc(100%-100px)] w-full flex flex-col items-center justify-center gap-[50px] text-[36px] dark:bg-tertiary">
+        <div className="absolute top-[100px] left-0 bg-primary h-[calc(100%-100px)] w-full flex flex-col items-center justify-center gap-[50px] text-[36px] z-40 dark:bg-tertiary">
           <Link href={"/"}>Homepage</Link>
           <Link href={"/"}>About</Link>
           <Link href={"/"}>Contact</Link>
