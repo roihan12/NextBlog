@@ -2,23 +2,23 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { upload } from "@/utils/uploadImage";
 import { htmlToMarkdown, markdownToHtml } from "@/utils/parser";
 
- interface EditorContentChanged {
+export interface EditorContentChanged {
   html: string;
   markdown: string;
 }
 
- interface EditorProps {
+export interface EditorProps {
   value?: string;
   onChange?: (changes: EditorContentChanged) => void;
 }
 
-const WritePage = (props: EditorProps) => {
+const WritePage:FC<EditorProps> = (props) => {
   const { status } = useSession();
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
